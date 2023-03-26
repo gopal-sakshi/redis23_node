@@ -1,10 +1,9 @@
 const winston = require('winston');
-const config = require('better-config');
+var config = require('../../config.json');
 
-config.set(`../../${process.env.CRASH_COURSE_CONFIG_FILE || 'config.json'}`);
 
 const logger = winston.createLogger({
-  level: config.get('logLevel'),
+  level: config.logLevel,
   transports: [
     new winston.transports.Console({
       format: winston.format.combine(

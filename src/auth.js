@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt');
-const config = require('better-config');
 const express = require('express');
 const { body } = require('express-validator');
 const session = require('express-session');
@@ -8,8 +7,8 @@ const morgan = require('morgan');
 const cors = require('cors');
 const logger = require('./utils/logger');
 const apiErrorReporter = require('./utils/apierrorreporter');
+var config = require('../config.json');
 
-config.set(`../${process.env.CRASH_COURSE_CONFIG_FILE || 'config.json'}`);
 
 const redis = require('./utils/redisclient');
 

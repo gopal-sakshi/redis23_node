@@ -1,11 +1,7 @@
 const Redis = require('ioredis');
-const config = require('better-config');
 const logger = require('./logger');
-
 const MAX_SEARCH_RESULTS = 1000;
-
-config.set(`../../${process.env.CRASH_COURSE_CONFIG_FILE || 'config.json'}`);
-
+var config = require('../../config.json');
 const redis = new Redis({
   host: config.redis.host,
   port: config.redis.port,

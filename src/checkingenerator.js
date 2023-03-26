@@ -1,9 +1,8 @@
-const config = require('better-config');
+
 const fetch = require('node-fetch');
 const logger = require('./utils/logger');
 const sleep = require('./utils/sleep');
-
-config.set(`../${process.env.CRASH_COURSE_CONFIG_FILE || 'config.json'}`);
+var config = require('../config.json');
 
 const CHECKIN_RECEIVER_URL = `http://localhost:${config.checkinReceiver.port}/api/checkin`;
 

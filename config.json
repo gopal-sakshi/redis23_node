@@ -6,13 +6,13 @@
     "keyPrefix": "session"  
   },
   "application": {
-    "port": 8081
+    "port": 3063
   },
   "auth": {
-    "port": 8083
+    "port": 3065
   },
   "checkinReceiver": {
-    "port": 8082,
+    "port": 3067,
     "maxStreamLength": 500000
   },
   "redis": {

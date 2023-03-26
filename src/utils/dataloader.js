@@ -1,7 +1,5 @@
 const bcrypt = require('bcrypt');
-const config = require('better-config');
-
-config.set(`../../${process.env.CRASH_COURSE_CONFIG_FILE || 'config.json'}`);
+var config = require('../config.json');
 
 const redis = require('./redisclient');
 

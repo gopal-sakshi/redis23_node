@@ -47,14 +47,8 @@ router.get(
     /* eslint-disable no-unused-vars */
     const userKey = redis.getKeyName('users', userId);
     /* eslint-enable */
-
-    // TODO: Get the firstName and lastName fields from the
-    // user hash whose key is in userKey.
-    // HINT: Check out the HMGET command...
-    // https://redis.io/commands/hmget
-    const [firstName, lastName] = ['TODO', 'TODO'];
-
-    res.status(200).json({ fullName: `${firstName} ${lastName}` });
+    const blah = await redisClient.hmget(userKey, 'firstName', 'lastName');
+    res.status(200).json({ fullName: `${blah}` });
   },
 );
 

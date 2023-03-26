@@ -4,6 +4,7 @@
   "description": "Node.js Crash Course for Redis",
   "main": "src/server.js",
   "scripts": {
+    "readME...................................": "main branch is without docker... main_copy branch is with docker",
     "auth": "node ./src/auth.js",
     "dev": "node ./node_modules/nodemon/bin/nodemon.js",
     "lint": "node ./node_modules/eslint/bin/eslint.js src",
@@ -12,11 +13,10 @@
     "checkingroupprocessor": "node ./src/checkingroupprocessor.js",
     "checkinprocessor": "node ./src/checkinprocessor.js --",
     "checkinreceiver": "node ./src/checkinreceiver.js",
-    "start": "node ./src/server.js"
+    "start": "nodemon ./src/server.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
-    "better-config": "^1.2.3",
     "connect-redis": "^5.1.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",

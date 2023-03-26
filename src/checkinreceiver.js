@@ -1,4 +1,3 @@
-const config = require('better-config');
 const express = require('express');
 const { body } = require('express-validator');
 const session = require('express-session');
@@ -10,7 +9,7 @@ const apiErrorReporter = require('./utils/apierrorreporter');
 
 const useAuth = process.argv[2] === 'auth';
 
-config.set(`../${process.env.CRASH_COURSE_CONFIG_FILE || 'config.json'}`);
+var config = require('../config.json');
 
 const redis = require('./utils/redisclient');
 
