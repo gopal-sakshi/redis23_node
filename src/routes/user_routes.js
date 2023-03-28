@@ -5,7 +5,7 @@ const redis = require('../utils/redisclient');
 
 const redisClient = redis.getClient();
 
-const SENSITIVE_FIELD_NAMES = ['password'];
+const SENSITIVE_FIELD_NAMES = ['password', 'atmPIN', 'unkoSecretField'];
 
 const removeSensitiveFields = (searchResults, ...fields) => {
   // Deep copy the searchResults array... avoids creating a side-effect function.
@@ -17,7 +17,6 @@ const removeSensitiveFields = (searchResults, ...fields) => {
   return newSearchResults;
 };
 
-// Get user by ID.
 router.get(
   '/user/:userId',
   [
@@ -27,15 +26,14 @@ router.get(
   async (req, res) => {
     const { userId } = req.params;
     const userKey = redis.getKeyName('users', userId);
-
     const userDetail = await redisClient.hgetall(userKey);
-    SENSITIVE_FIELD_NAMES.map((fieldName) => delete userDetail[fieldName]);
-
+    console.log(userDetail);
+    // SENSITIVE_FIELD_NAMES.map((fieldName) => delete userDetail[fieldName]);
+    ['password', 'atmPIN', 'unkoSecretField'].map((field23) => delete userDetail[field23]);
     res.status(200).json(userDetail);
   },
 );
 
-// EXERCISE: Get user's full name.
 router.get(
   '/user/:userId/fullname',
   [

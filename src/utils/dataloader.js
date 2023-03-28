@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt');
-var config = require('../config.json');
 
 const redis = require('./redisclient');
 
