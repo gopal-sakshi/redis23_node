@@ -1,24 +1,24 @@
 {
-  "logLevel": "debug",
-  "session": {
-    "secret": "red15alltheTh1ngZ!",
-    "appName": "checkinapp",
-    "keyPrefix": "session"  
-  },
-  "application": {
-    "port": 3063
-  },
-  "auth": {
-    "port": 3065
-  },
-  "checkinReceiver": {
-    "port": 3067,
-    "maxStreamLength": 500000
-  },
-  "redis": {
-    "host": "localhost",
-    "port": 6379,
-    "password": null,
-    "keyPrefix": "ncc"
-  }
+    "logLevel": "debug",
+    "session": {
+        "secret": "red15alltheTh1ngZ!",
+        "appName": "checkinapp",
+        "keyPrefix": "session"
+    },
+    "application": {
+        "port": 3063
+    },
+    "auth": {
+        "port": 3065
+    },
+    "checkinReceiver": {
+        "port": 3067,
+        "maxStreamLength": 500000
+    },
+    "redis": {
+        "host": "localhost",
+        "port": 6379,
+        "password": null,
+        "keyPrefix": "ncc"
+    }
 }
