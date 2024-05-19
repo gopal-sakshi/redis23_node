@@ -23,6 +23,8 @@ async function main() {
     console.log(`current message count in channel ${channel} ====> ${messageCount}`);
 
 
+    // use xrange directly in redis-cli         XRANGE ipl23 - +
+
     // use xread to read all messages in channel
     let messages = await redis.xread(["STREAMS", channel, 0]);
     messages = messages[0][1];

@@ -39,9 +39,8 @@ router.get(
     ],
     async (req, res) => {
         const { userId } = req.params;
-        /* eslint-disable no-unused-vars */
         const userKey = redis.getKeyName('users', userId);
-        /* eslint-enable */
+        console.log("userkey ==========> ", userKey);
         const blah = await redisClient.hmget(userKey, 'firstName', 'lastName');
         res.status(200).json({ fullName: `${blah}` });
     },
@@ -56,9 +55,7 @@ router.get(
     ],
     async (req, res) => {
         // Need to escape . and @ in the email address when searching.
-        /* eslint-disable no-useless-escape */
         const emailAddress = req.params.emailAddress.replace(/\./g, '\\.').replace(/\@/g, '\\@');
-        /* eslint-enable */
         const searchResults = await redis.performSearch(redis.getKeyName('usersidx'), `@email:{${emailAddress}}`);
 
         const response = searchResults.length === 1

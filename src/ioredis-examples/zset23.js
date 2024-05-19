@@ -13,11 +13,11 @@ async function main() {
         ...scores.map(({ name, score }) => [score, name])
     );
 
-    console.log(await redis.zrange("user-zset", 2, 3)); // [ 'Alex', 'Tom' ]
-    console.log(await redis.zrange("user-zset", 2, 3, "WITHSCORES")); // [ 'Alex', '99.5', 'Tom', '100' ]
-    console.log(await redis.zrange("user-zset", 2, 3, "REV")); // [ 'Bob', 'Jeff' ]
-    console.log(await redis.zrange("user-zset", 80, 100, "BYSCORE")); // [ 'Bob', 'Alex', 'Tom' ]
-    console.log(await redis.zrange("user-zset", 2, 3)); // [ 'Alex', 'Tom' ]
+    console.log(await redis.zrange("user-zset", 2, 3));                 // [ 'Alex', 'Tom' ]
+    console.log(await redis.zrange("user-zset", 2, 3, "WITHSCORES"));   // [ 'Alex', '99.5', 'Tom', '100' ]
+    console.log(await redis.zrange("user-zset", 2, 3, "REV"));          // [ 'Bob', 'Jeff' ]
+    console.log(await redis.zrange("user-zset", 80, 100, "BYSCORE"));   // [ 'Bob', 'Alex', 'Tom' ]
+    console.log(await redis.zrange("user-zset", 2, 3));                 // [ 'Alex', 'Tom' ]
 }
 
 main();
