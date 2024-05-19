@@ -74,7 +74,7 @@ app.get(
     },
 );
 
-const port = config.get('auth.port');
+const port = config.auth.port;
 app.listen(port, () => {
     logger.info(`Authentication service listening on port ${port}.`);
 });

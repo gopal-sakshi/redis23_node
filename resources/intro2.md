@@ -20,5 +20,10 @@ Later we can have one or more other parts of the system do <further processing> 
 application is divided into 4 services
 - auth service      - listens on http port; password login; redis as shared session store
 - checkin receiver  - listens on http port; receives checkin requests from users; each checkin is placed in redis stream
-- checkin processor - monitors the checkin stream; update user/location information as it processes each checkin
 - api server        - app's endpoints (retrieve info about users/locations from redis)
+- checkin processor - monitors the checkin stream; update user/location information as it processes each checkin
+
+
+auth            3065
+checkin         3067
+api server      3063

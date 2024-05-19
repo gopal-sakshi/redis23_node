@@ -24,16 +24,11 @@ const loadData = async (jsonArray, keyName) => {
 
 const loadUsers = async () => {
     console.log('Loading user data...');
-    /* eslint-disable global-require */
     const usersJSON = require('../../data/users.json');
-    /* eslint-enable */
 
-    // Hash the passwords...
-    /* eslint-disable array-callback-return, no-param-reassign */
     usersJSON.users.map((user) => {
-        user.password = bcrypt.hashSync(user.password, 5);
+        user.password = bcrypt.hashSync(user.password, 5);          // Hash the passwords...
     });
-    /* eslint-enable */
 
     const errorCount = await loadData(usersJSON.users, 'users');
     console.log(`User data loaded with ${errorCount} errors.`);
@@ -41,22 +36,16 @@ const loadUsers = async () => {
 
 const loadLocations = async () => {
     console.log('Loading location data...');
-    /* eslint-disable global-require */
     const locationsJSON = require('../../data/locations.json');
-    /* eslint-enable */
-
     const errorCount = await loadData(locationsJSON.locations, 'locations');
     console.log(`Location data loaded with ${errorCount} errors.`);
 };
 
 const loadLocationDetails = async () => {
     console.log('Loading location details...');
-    /* eslint-disable global-require */
     const locationsJSON = require('../../data/locationdetails.json');
-    /* eslint-enable */
 
     const pipeline = redisClient.pipeline();
-
     for (const locationDetail of locationsJSON.locationDetails) {
         pipeline.call('JSON.SET', redis.getKeyName('locationdetails', locationDetail.id), '.', JSON.stringify(locationDetail));
     }
@@ -76,40 +65,27 @@ const loadLocationDetails = async () => {
 
 const loadCheckins = async () => {
     console.log('Loading checkin stream entries...');
-
-    /* eslint-disable global-require */
     const { checkins } = require('../../data/checkins.json');
-    /* eslint-enable */
-
     const streamKeyName = redis.getKeyName('checkins');
 
-    // Delete any previous stream.
-    await redisClient.del(streamKeyName);
+    await redisClient.del(streamKeyName);           // Delete any previous stream.
 
-    // Batch load entries 100 at a time.
     let n = 0;
     let pipeline = redisClient.pipeline();
 
-    /* eslint-disable no-await-in-loop */
-    do {
+    do {                // Batch load entries 100 at a time.
         const checkin = checkins[n];
         pipeline.xadd(streamKeyName, checkin.id, 'locationId', checkin.locationId, 'userId', checkin.userId, 'starRating', checkin.starRating);
         n += 1;
 
         if (n % 100 === 0) {
-            // Send 100 XADD commands to Redis.
-            await pipeline.exec();
-
-            // Start a fresh pipeline.
-            pipeline = redisClient.pipeline();
+            await pipeline.exec();                      // Send 100 XADD commands to Redis.
+            pipeline = redisClient.pipeline();          // Start a fresh pipeline.
         }
     } while (n < checkins.length);
-    /* eslint-enable */
 
-    // Send any remaining checkins if the number of checkins in the
-    // file wasn't divisible by 100.
     if (pipeline.length > 0) {
-        await pipeline.exec();
+        await pipeline.exec();      // Send remaining checkins if the no. of checkins in the file wasn't divisible by 100.
     }
 
     const numEntries = await redisClient.xlen(streamKeyName);

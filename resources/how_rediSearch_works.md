@@ -17,3 +17,12 @@ To resolve the query <which user has the email abc@gmail.com>
 
 Find all the users who have between 1000 and 3000 checkins
 - we use a <Redis Sorted Set> as a secondary index
+
+================================================================= 
+
+Redis search
+- a module from redis labs
+- secondary index querying engine & query language
+- automatically watches over certain <redis hashes>
+    and indexes them in a way we define
+
