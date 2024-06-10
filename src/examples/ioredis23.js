@@ -16,15 +16,15 @@ const redisDemo = async () => {
 
     // 01   basic set/get
     await redisClient.set('RM_captain', 'Nacho Fernandez');
-    const value = await redisClient.get('myname');
+    const value = await redisClient.get('RM_captain');
     console.log("get/set value =========> ", value);
 
     // 02   
-    await redisClient.zadd("sortedSet23", 1, "one", 2, "dos", 4, "quatro", 3, "three");
+    await redisClient.zadd("sortedSet23", 1, "okati", 2, "rendu", 4, "naalugu", 3, "moodu");
     await redisClient.zrange("sortedSet23", 0, 2, "WITHSCORES").then((elements) => { 
         console.log("zrange elements23 ====> ", elements)
     });
-
+    await redisClient.del("sortedSet23");
 
     redisClient.quit();
     console.log("\ndisconnected from redis =======================");

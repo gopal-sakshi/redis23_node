@@ -53,7 +53,7 @@ async function main() {
     console.log("hmset =====> ", await redis.hmset("rma", { captain: "Nacho", rivals: ["Barca", "Atleti"] }));
     console.log("hmget (multiple get) ====> ", await redis.hmget("rma", ["captain", "rivals", "manager"]));
 
-
+    redis.quit();
     process.exit(0)
 }
 

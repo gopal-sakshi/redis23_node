@@ -3,14 +3,38 @@ const redis = new Redis({
     port: 6379,
     host: "127.0.0.1"
 });
+/**************************************************************************/
+// const express = require('express');
+// const app = express();
+// const bodyParser= require('body-parser');
+// app.use(bodyParser.json());
 
+// const port = 12236;
+// app.listen(port, () => {
+//     console.log(`Example app listening on port ${port}`);
+// });
+// app.get('/', (req, res) => {
+//     res.send('base path setup ayindi');
+// });
+// app.get('/getFeed23', async (req, res) => {
+//     let messages = await redis.xread(["STREAMS", "ipl23", 0]);
+//     res.send({
+//         time23: new Date().toISOString(),
+//         messages23: messages
+//     })
+// });
+// app.post('/postFeed23', async (req, res) => {
+//     let res22 = await redis.xadd("ipl23", "*", req.body.msg22, req.body.type);
+//     res.status(200).send({ time23: new Date().toISOString(), info: res22 })
+// });
+/**************************************************************************/
 // https://redis.io/topics/streams-intro
 
 
 async function main() {
     const channel = "ipl23";
     let messageCount = await redis.xlen(channel);
-    console.log(`current message count in channel ${channel} ====> ${messageCount}`);
+    console.log(`current message count in channel23 ${channel} ====> ${messageCount}`);
 
     // specify channel to write a message into, messages are key value
     const myMessage1 = "kkr are top in ipl2024";
@@ -35,7 +59,9 @@ async function main() {
         console.log("reading message:", msg);
     }
 
-    process.exit(0);
+    await redis.del("ipl23")
+    await redis.quit();
+    // process.exit(0);
 }
 
-main();
+// main();

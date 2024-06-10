@@ -17,3 +17,8 @@
 `Scripting`
 - use Lua scripts
 - a number of use cases for pipelining can be addressed more efficiently using scripts
+
+
+`pipeline23`
+- send multiple commands to the server
+- read all the replies (responses) in a single step.

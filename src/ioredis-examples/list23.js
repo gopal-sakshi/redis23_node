@@ -29,6 +29,7 @@ async function main() {
 
     console.log("index 23, 24, 25 =========> ", index23, index24, index25);
 
+    // if 25 doesnt exist ---> nothing happens, no insertion
     const insert24 = await redis.linsert("squares23", 'BEFORE', 25, 20);
     console.log("insert24 ==========> ", await redis.lrange("squares23", 0, -1));
 
@@ -43,7 +44,7 @@ async function main() {
     const lpushed = await redis.lpush("squares23", 98);
     console.log("lpushed23 ==========> ", await redis.lrange("squares23", 0, -1));
 
-    await redis.lset("squares23", 4, 45);
+    await redis.lset("squares23", 3 , 45);
     console.log("lset23 ==========> ", await redis.lrange("squares23", 0, -1));
 
     // let bb1 = await redis.lrange("squares23", 0, 1);
@@ -65,15 +66,16 @@ async function main() {
     const position = await redis.lpos("squares23", 16);
     console.log("position of 16 =========> ", position);
 
-    // setTimeout(() => {
-    //     // redis is in the block mode due to blpop(); so we duplicate a new connection to invoke LPUSH command.
-    //     // blpop ===> it blocks, until lpop works; until there is an element to pop; redis connetion will block
-    //     redis.duplicate().lpush("block-list23", "this is 1st element in bl23");
-    // }, 3000);
-    // const blockPopped = await redis.blpop("block-list23", 0);             // Resolved after 3000ms.
-    // console.log("blockpopped23 ===========> ", blockPopped);
+    setTimeout(() => {
+        // redis is in the block mode due to blpop(); so we duplicate a new connection to invoke LPUSH command.
+        // blpop ===> it blocks, until lpop works; until there is an element to pop; redis connetion will block
+        redis.duplicate().lpush("block-list23", "this is 1st element in bl23");
+    }, 3000);
+    const blockPopped = await redis.blpop("block-list23", 0);             // Resolved after 3000ms.
+    console.log("blockpopped23 ===========> ", blockPopped);
 
     await redis.del("squares23")        // if i dont delete "squares23" key --> list is growing bigger everytime I run 
+    redis.quit();
     process.exit(0);
 }
 

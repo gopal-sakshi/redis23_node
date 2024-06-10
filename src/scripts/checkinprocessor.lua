@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global
+
 -- Example call from Redis
 -- EVALSHA <sha> 2 user_hash_key location_hash_key timestamp location_id star_rating
 
