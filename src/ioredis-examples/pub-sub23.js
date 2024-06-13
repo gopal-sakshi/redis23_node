@@ -17,6 +17,8 @@ const redis = new Redis({
     host: "127.0.0.1"
 });
 
+// curl --location 'localhost:12237/publish23' --header 'Content-Type: application/json' --data '{ "club23": "real_madrid", "stadium": "Bernabeu" }'
+
 app.post("/publish23", async (req, res) => {
     let subscriberCount = await redis.publish("pub_football12", JSON.stringify({ ...req.body }));
     return res.status(200).send({ time: new Date().toISOString(), info23: subscriberCount });
