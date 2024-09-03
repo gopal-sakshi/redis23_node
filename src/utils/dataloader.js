@@ -172,8 +172,8 @@ const runDataLoader = async (params) => {
             await loadLocations();
             await loadLocationDetails();
             await loadCheckins();
-            // await createIndexes();
-            // await createBloomFilter();
+            await createIndexes();
+            await createBloomFilter();
             break;
         default:
             usage();

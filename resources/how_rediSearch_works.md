@@ -26,3 +26,4 @@ Redis search
 - automatically watches over certain <redis hashes>
     and indexes them in a way we define
 
+=================================================================

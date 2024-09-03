@@ -146,5 +146,4 @@ RPOP
 - cappedStreams = keep the stream size in check; use MAXLEN commandLineArg
 - https://redis.io/commands/xadd/
 
-
-    
+# --------------------------------------------------------------------------------------------    

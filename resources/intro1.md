@@ -14,3 +14,4 @@ npm run load all                            load the sampleData into Redis
 hgetall ncc:locations:106
 hgetall ncc:users:12                        verify data is loaded
 json.get ncc:locationdetails:121
+----------------------------------------------------------
